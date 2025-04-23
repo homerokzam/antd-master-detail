@@ -1,0 +1,77 @@
+export const mockMaster = [
+  {
+    descricao: "Description 1",
+    tipo: "Type 1",
+    ativo: "2024-05-09T10:27:57",
+    inativo: "2024-05-09T10:27:57",
+    id: "18bd8b1a-8af2-449c-93a9-4f9987fb985c"
+  },
+  {
+    descricao: "Description 2",
+    tipo: "REAIS",
+    ativo: "2024-05-09T09:54:40",
+    inativo: "2024-05-09T09:54:40",
+    id: "cf669386-1c9f-47f5-b516-1d1ccdb478e3"
+  }
+];
+
+export const mockDetail = [
+    {
+      "codigo": null,
+      "descricao": "Description 1 - Detail",
+      "inicioVigencia": null,
+      "fimVigencia": null,
+      "valorHonorario": null,
+      "valorOperacional": null,
+      "valorTotal": 3455.99,
+      "valorFilme": null,
+      "codigoPorteMedico": null,
+      "codigoTUSS": "84320214",
+      "codigoTISS": null,
+      "quantidadeEmbalagem": null,
+      "descricaoUnidade": null,
+      "ativo": null,
+      "inativo": null,
+      "motivoAlteracao": "Motivo Alteração 1 - Detail",
+      "faturamentoId": "18bd8b1a-8af2-449c-93a9-4f9987fb985c",
+      "faturamento": null,
+      "porteMedicoId": null,
+      "porteMedico": null,
+      "isDeleted": false,
+      "deletedAtUtc": null,
+      "createdAtUtc": "2025-02-13T00:00:00",
+      "createdById": "4027c89c-5c7f-4dd1-9c07-87b3b391bfb2",
+      "updatedAtUtc": "2025-02-13T18:14:51.706532",
+      "createdById": "4027c89c-5c7f-4dd1-9c07-87b3b391bfb2",
+      "id": "3e9448a0-c6ef-4e05-9986-fe8196c2dad3"
+    },
+    {
+      "codigo": null,
+      "descricao": "Description 2 - Detail",
+      "inicioVigencia": null,
+      "fimVigencia": null,
+      "valorHonorario": null,
+      "valorOperacional": null,
+      "valorTotal": 2818.8,
+      "valorFilme": null,
+      "codigoPorteMedico": null,
+      "codigoTUSS": "84511141",
+      "codigoTISS": null,
+      "quantidadeEmbalagem": null,
+      "descricaoUnidade": null,
+      "ativo": null,
+      "inativo": null,
+      "motivoAlteracao": "Motivo Alteração 2 - Detail",
+      "faturamentoId": "cf669386-1c9f-47f5-b516-1d1ccdb478e3",
+      "faturamento": null,
+      "porteMedicoId": null,
+      "porteMedico": null,
+      "isDeleted": false,
+      "deletedAtUtc": null,
+      "createdAtUtc": "2025-02-13T00:00:00",
+      "createdById": "4484f16b-84dc-471f-85a1-9b0a586923d4",
+      "updatedAtUtc": "2025-02-13T18:14:51.693439",
+      "updatedById": "4484f16b-84dc-471f-85a1-9b0a586923d4",
+      "id": "0196642b-dc87-7cbc-9987-4860811bcf60"
+    },
+  ]
