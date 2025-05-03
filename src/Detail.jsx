@@ -6,6 +6,17 @@ import { mockDetail } from './mockTables';
 const FaturamentoItemsTable = ({ faturamentoId }) => {
   const [searchText, setSearchText] = useState('');
   
+  // Estilos inline para substituir as classes CSS
+  const detailContentStyle = {
+    width: '100%',
+    padding: '10px 0'
+  };
+
+  const detailTableScrollStyle = {
+    width: '100%',
+    overflow: 'auto'
+  };
+
   // Filtra os itens com base no texto de pesquisa
   const filteredItems = searchText
     ? mockDetail.filter(item => 
@@ -73,16 +84,9 @@ const FaturamentoItemsTable = ({ faturamentoId }) => {
       render: (valor) => valor ? `R$ ${parseFloat(valor).toFixed(2)}` : '-',
     },
     {
-      title: 'Filme',
-      dataIndex: 'valorFilme',
-      key: 'valorFilme',
-      width: 120,
-      render: (valor) => valor ? `R$ ${parseFloat(valor).toFixed(2)}` : '-',
-    },
-    {
-      title: 'Porte Médico',
-      dataIndex: 'porteMedicoId',
-      key: 'porteMedicoId',
+      title: 'Medicamento',
+      dataIndex: 'codigoMedicamentoId',
+      key: 'codigoMedicamentoId',
       width: 120
     },
     {
@@ -119,10 +123,28 @@ const FaturamentoItemsTable = ({ faturamentoId }) => {
   ];
 
   return (
-    <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 10 }}>
-        <h4 style={{ margin: 0 }}>Itens do Faturamento</h4>
-        <Button type="primary" icon={<PlusOutlined />} size="small">Adicionar Item</Button>
+    <div style={detailContentStyle}>
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center', 
+        marginBottom: 10, 
+        width: '100%', 
+        minHeight: 32,
+        flexWrap: 'nowrap'
+      }}>
+        <div style={{ flex: '0 0 auto' }}>
+          <h4 style={{ margin: 0 }}>Itens do Faturamento</h4>
+        </div>
+        <div style={{ flex: '0 0 auto', minWidth: 130, marginLeft: 'auto' }}>
+          <Button 
+            type="primary" 
+            icon={<PlusOutlined />} 
+            size="small"
+          >
+            Adicionar Item
+          </Button>
+        </div>
       </div>
       
       {mockDetail.length === 0 ? (
@@ -137,19 +159,21 @@ const FaturamentoItemsTable = ({ faturamentoId }) => {
               prefix={<SearchOutlined />}
               value={searchText}
               onChange={e => setSearchText(e.target.value)}
-              style={{ width: 400 }}
+              style={{ width: '100%', maxWidth: 400 }}
               allowClear
               size="small"
             />
           </div>
-          <div style={{ overflow: 'auto' }}>
+          <div style={detailTableScrollStyle}>
             <Table
+              style={{ width: '100%' }}
               columns={itemColumns}
               dataSource={filteredItems}
               pagination={{ pageSize: 10, size: 'small' }}
               rowKey={(record, index) => `${record.codigo || ''}${index}`}
               size="small"
               scroll={{ x: 1800 }}
+              tableLayout="fixed"
             />
           </div>
         </div>

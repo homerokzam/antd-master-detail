@@ -11,6 +11,19 @@ const Master = ({
 }) => {
   const [searchText, setSearchText] = useState('');
 
+  // Estilos inline para substituir as classes CSS
+  const masterTableContainerStyle = {
+    width: '100%'
+  };
+
+  const detailTableContainerStyle = {
+    margin: 0,
+    width: '100%',
+    overflow: 'visible', 
+    padding: '10px',
+    position: 'relative'
+  };
+
   // Função para gerar uma chave única para cada linha
   const getRowKey = (record) => {
     // Verifica se o registro tem um ID
@@ -20,9 +33,9 @@ const Master = ({
     return `${record.descricao}-${record.tipo}-${Math.random()}`;
   };
 
-  // Função para renderizar conteúdo expandido
+  // Função para renderizar conteúdo expandido com container de tamanho fixo
   const expandedRowRender = record => (
-    <div style={{ margin: 0 }}>
+    <div style={detailTableContainerStyle}>
       <Detail faturamentoId={record.id} />
     </div>
   );
@@ -39,13 +52,14 @@ const Master = ({
     {
       title: '',
       key: 'acoes',
-      width: '10%',
+      width: 100,
+      fixed: 'left',
       render: (_, record) => (
         <Space>
           <Tooltip title="Editar">
-            <Button icon={<EditOutlined />} onClick={() => onEdit(record)} />
+            <Button icon={<EditOutlined />} onClick={() => onEdit && onEdit(record)} />
           </Tooltip>
-          <Popconfirm title="Tem certeza que deseja excluir?" onConfirm={() => onDelete(record.id)} okText="Sim" cancelText="Não">
+          <Popconfirm title="Tem certeza que deseja excluir?" onConfirm={() => onDelete && onDelete(record.id)} okText="Sim" cancelText="Não">
             <Tooltip title="Excluir">
               <Button icon={<DeleteOutlined />} danger />
             </Tooltip>
@@ -57,14 +71,14 @@ const Master = ({
       title: 'Descrição',
       dataIndex: 'descricao',
       key: 'descricao',
-      width: '70%',
+      width: 500,
       sorter: (a, b) => a.descricao?.localeCompare(b.descricao),
     },
     {
       title: 'Tipo',
       dataIndex: 'tipo',
       key: 'tipo',
-      width: '10%',
+      width: 100,
       filters: [
         { text: 'A', value: 'A' },
         { text: 'B', value: 'B' },
@@ -75,7 +89,7 @@ const Master = ({
       title: 'Ativo',
       dataIndex: 'ativo',
       key: 'ativo',
-      width: '10%',
+      width: 100,
       render: (ativo) => ativo ? 'Sim' : 'Não',
       filters: [
         { text: 'Sim', value: true },
@@ -86,27 +100,32 @@ const Master = ({
   ];
 
   return (
-    <div>
+    <div style={masterTableContainerStyle}>
       <div style={{ marginBottom: 16 }}>
         <Input
           placeholder="Pesquisar por descrição ou tipo"
           prefix={<SearchOutlined />}
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
-          style={{ width: 300 }}
+          style={{ width: '100%', maxWidth: 300 }}
           allowClear
         />
       </div>
       <Table
+        style={{ width: '100%' }}
         dataSource={Array.isArray(filteredData) ? filteredData : []}
         columns={columns}
         rowKey={getRowKey}
         loading={isLoading}
+        scroll={{ x: 800 }}
         expandable={{
           expandedRowRender,
           expandRowByClick: false,
+          columnWidth: 50,
+          expandedRowClassName: () => 'expanded-row'
         }}
         pagination={{ pageSize: 10 }}
+        tableLayout="fixed"
       />
     </div>
   );  
